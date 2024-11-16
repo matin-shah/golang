@@ -11,7 +11,7 @@ import (
 	"github.com/olekukonko/tablewriter"
 )
 
-// func TTest() {
+// func Team() {
 // 	url := "https://v3.football.api-sports.io/teams"
 // 	fetchData := FetchData(url)
 // 	var response models.TeamResponse
