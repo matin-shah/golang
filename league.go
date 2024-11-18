@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"footbal-api-parser/models"
 	"os"
-
 	"strconv"
 
 	"github.com/olekukonko/tablewriter"
@@ -98,16 +97,29 @@ func Get() {
 		fmt.Println("Invalid league number.")
 		return
 	}
-	selectedLeague := &response.Response[choiceInt-1]
+	leagueMap := make(map[int]*models.LeagueResponse)
+
+	for _, respLeague := range response.Response {
+		leagueMap[respLeague.League.ID] = &respLeague
+	}
+
+	selectedLeague := leagueMap[choiceInt]
+	if selectedLeague == nil {
+		fmt.Println("League not found.")
+		return
+	}
+
 	fmt.Printf("\n%s Years: \n", selectedLeague.League.Name)
 
 	if selectedLeague.Seasons != nil {
 		Table := tablewriter.NewWriter(os.Stdout)
 		Table.SetHeader([]string{"ID", "Year"})
 		Table.SetAlignment(tablewriter.ALIGN_LEFT)
+
 		for i, season := range selectedLeague.Seasons {
 			Table.Append([]string{strconv.Itoa(i + 1), strconv.Itoa(season.Year)})
 		}
+
 		Table.Render()
 
 	} else {
