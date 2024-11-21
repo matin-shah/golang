@@ -1,4 +1,4 @@
 # golang
 
 
-i can get team deta 
+I can‍‍‍‍‍‍‍‍‍‍‍`t get team information
